@@ -1,16 +1,16 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var lowChar = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var lowChar = "abcdefghijklmnopqrstuvwxyz";
 //var lowChar = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
 var upLowChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 var smallSink = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 var kitchenSink = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%&^?";
+var x;
 
 // changing string to random 
 String.prototype.shuffle = function () {
   var chop = this.split(""),
       n = chop.length;
-
   for(var i = n - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var tmp = chop[i];
@@ -18,42 +18,46 @@ String.prototype.shuffle = function () {
       chop[j] = tmp;
   }
   return chop.join("");
+  
 }
-console.log(kitchenSink.shuffle());
+
+console.log(lowChar.shuffle());
 
 
 
-// Write password to the #password input
+// ask the user to pick the size of the password
 function writePassword() {
-  var x = prompt("choose a number between 4 and 20, this will be the lenght of the password.")
+  x = prompt("choose a number between 4 and 20, this will be the lenght of the password.")
 
   if(x < 4 || x >20){
     alert("pic a different number")
    }else{
-     x = prompt("You have chosen "+ x);
-     console.log(x);
+     x = prompt("You have chosen "+ x +" click ok button to continue.");
+     console.log(x);          
    }  
-    var data1 = '';
-    var password = prompt("Your password contains lower case letters, if you want upper and lower click OK!");
-    
+var number = x;
+// ask the user the makeup of the password.     
+    var shorten;
+    var password = prompt("Your password contains lower case letters, if you want upper and lower click OK!");    
     if (password === true) {
-      console.log("your password is upper and lower");
-    } else {
-      mixedChar = lowChar.length;
-      for( var i = 0; i< x;i++) {
-        data1 += lowChar.charAt(Math.floor(Math.random() * mixedChar));
-      }
-      console.log(mix);
+      console.log("your password is upper and lower");      
+    } else {    
+      password = lowChar.shuffle();
+     shorten = password.substring(0, 8);  
+      console.log(shorten);
       console.log("Lower it is!");
+    }
+     
       
     }   
+    
     
 
  // var passwordText = document.querySelector("#password");
   
  // passwordText.value = password;
 
-}
+
 
 
 // Add event listener to generate button
