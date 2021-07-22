@@ -1,73 +1,82 @@
-// Assignment Code
+
+var lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var characters = ["!", "%", "&", ",", "*", "+", "-", ".", "/", "<", ">", "?","~"];
 var generateBtn = document.querySelector("#generate");
-var lowChar = "abcdefghijklmnopqrstuvwxyz";
-var upLowChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-var smallSink = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-var kitchenSink = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%&^?";
-var lenght;
-var x;
-var pw;
 
-// changing string to random 
-String.prototype.shuffle = function () {
-  var chop = this.split(""),
-      n = chop.length;
-  for(var i = n - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = chop[i];
-      chop[i] = chop[j];
-      chop[j] = tmp;
-  }
-  return chop.join("");
-  
+// Variable Declaration 
+var cfLength = "";
+var cfCharacter;
+var cfNumber;
+var cfUpper;
+var cfLower;
+
+// Prompt to confirm how many characters the user would like in their password
+function generatePassword() {
+  var cfLength = (prompt("How many characters would you like your password to contain?"));
+
+  // Loop if answer is outside the parameters 
+  while(cfLength <= 7 || cfLength >= 51) {
+      alert("Password length must be between 8-50 characters Try again");
+      var cfLength = (prompt("How many characters would you like your password to contain?"));
+      } 
+
+      // Repeat back how many charactes the user will have  
+      alert(`Your password will have ${cfLength} characters`);
+
+    // Determine parameters of password 
+    var cfCharacter = confirm("Click OK to confirm if you would like to include special characters");
+    var cfNumCharacter = confirm("Click OK to confirm if you would like to include numeric characters");    
+    var confirmLowerCase = confirm("Click OK to confirm if you would like to include lowercase characters");
+    var confirmUpperCase = confirm("Click OK to confirm if you would like to include uppercase characters");
+      // Loop if answer is outside the parameters 
+      while(confirmUpperCase === false && confirmLowerCase === false && cfCharacter === false && cfNumCharacter === false) {
+        alert("You must choose at least one parameter");
+        var cfCharacter = confirm("Click OK to confirm if you would like to include special characters");
+        var cfNumCharacter = confirm("Click OK to confirm if you would like to include numeric characters");    
+        var confirmLowerCase = confirm("Click OK to confirm if you would like to include lowercase characters");
+        var confirmUpperCase = confirm("Click OK to confirm if you would like to include uppercase characters");   
+    } 
+
+      // Assign an action to the password parameters NEED TO FIX THIS
+      var wordCharacters = []
+      
+    if (cfCharacter) {
+      wordCharacters = wordCharacters.concat(characters)
+    }
+
+    if (cfNumCharacter) {
+      wordCharacters = wordCharacters.concat(number)
+    }
+      
+    if (confirmLowerCase) {
+      wordCharacters = wordCharacters.concat(lower)
+    }
+
+    if (confirmUpperCase) {
+      wordCharacters = wordCharacters.concat(upper)
+    }
+
+      console.log(wordCharacters)
+
+      // Empty string to be filled based on for loop selecting random characters from the array
+      var randomPassword = ""
+      
+      for (var i = 0; i < cfLength; i++) {
+        randomPassword = randomPassword + wordCharacters[Math.floor(Math.random() * wordCharacters.length)];
+        console.log(randomPassword)
+      }
+      return randomPassword;
 }
 
-
-
-
-// ask the user to pick the size of the password
+// Write password to the #password input
 function writePassword() {
-   lenght = prompt("choose a number between 4 and 20, this will be the lenght of the password.");
-  if(lenght < 4 || lenght >20){
-    alert("pic a different number")
-   }else{
-     shorten = prompt("You have chosen "+ lenght +" click ok button to continue.");
-     console.log(lenght);          
-   } 
-   
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
-// ask the user the makeup of the password.     
-    x ===parseInt(length);
-    var password = prompt("Your password contains lower case letters, if you want upper and lower click OK!");
-    // return password   
-    if (password !== true) {
-      password = lowChar.shuffle();
-      console.log(password.substring(0, x)); 
-document.getElementById("password").innerHTML = password.substring(0, x);  
-// provide a second choice 
-} else {    
-var secPass = prompt("Your password contains upper and lower characters, do you want numbers? click ok for yes.");
-// return password
-if (secPass !==true){
-  secPass = upLowChar.shuffle();
-  console.log(secPass.substring(0, 8));
-document.getElementById("password").innerHTML = secPass.substring(0, x);
+  passwordText.value = password;
 }
-}
-}
-    
-    
-
- // var passwordText = document.querySelector("#password");
-  
- // passwordText.value = password;
-
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
