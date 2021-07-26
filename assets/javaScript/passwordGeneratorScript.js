@@ -1,29 +1,29 @@
-
+// An array of characters that will be the password
 var lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var characters = ["!", "%", "&", ",", "*", "+", "-", ".", "/", "<", ">", "?","~"];
 var generateBtn = document.querySelector("#generate");
 
-// Variable Declaration 
+// The Var will be changed with the following.
 var cfLength = "";
 var cfCharacter;
 var cfNumber;
 var cfUpper;
 var cfLower;
 
-// Prompt to confirm how many characters the user would like in their password
+// Prompt user for lenght of password
 function generatePassword() {
   var cfLength = (prompt("How many characters would you like your password to contain?"));
 
-  // Loop if answer is outside the parameters 
-  while(cfLength <= 7 || cfLength >= 51) {
+  // Check if answer is correct
+  while(cfLength <= 8 || cfLength >= 128) {
       alert("Password length must be between 8-50 characters Try again");
       var cfLength = (prompt("How many characters would you like your password to contain?"));
       } 
 
       // Repeat back how many charactes the user will have  
-      alert(`Your password will have ${cfLength} characters`);
+      alert("Your password will have"+ cfLength +"characters");
 
     // Determine parameters of password 
     var cfCharacter = confirm("Click OK to confirm if you would like to include special characters");
